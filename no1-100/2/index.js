@@ -86,4 +86,33 @@ const result1 = addTwoNumbers1(
     {val: 9, next: {val: 9, next: {val: 9, next: {val: 9, next: null}}}}
     // {val: 4, next: {val: 5, next: {val: 6, next: null}}}
 )
-console.log('result1=', JSON.stringify(result1, null));
+// console.log('result1=', JSON.stringify(result1, null));
+
+
+var addTwoNumbers2 = function (l1, l2) {
+    const result = {val: 0, next: null}
+    let tempRes = result
+    while (l1 || l2) {
+        const sum = (l1?.val ?? 0) + (l2?.val ?? 0) + tempRes.val
+        tempRes.val = sum % 10
+        l1 = l1?.next ?? null
+        l2 = l2?.next ?? null
+        if (!l1 && !l2 && sum < 10) {
+            break
+        }
+        tempRes = tempRes.next = {
+            val: +(sum >= 10),
+            next: null,
+        }
+
+    }
+    return result
+}
+
+const result2 = addTwoNumbers2(
+    // {val: 1, next: {val: 2, next: {val: 3, next: null}}},
+    {val: 9, next: {val: 9, next: {val: 9, next: null}}},
+    {val: 9, next: {val: 9, next: {val: 9, next: {val: 9, next: null}}}}
+    // {val: 4, next: {val: 8, next: {val: 9, next: null}}}
+)
+console.log('result2=', JSON.stringify(result2, null));
